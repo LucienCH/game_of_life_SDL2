@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git submodule init
 cd SDL
 mkdir build
 cd build
