@@ -1,6 +1,7 @@
 #include "../SDL/include/SDL.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include "test.h"
 
 
 int main(int argc, char* args[]) {

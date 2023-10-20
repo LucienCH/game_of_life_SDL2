@@ -7,6 +7,13 @@
 *.obj
 *.elf
 
+bin/
+.vscode/
+.DS_Store
+obj/
+SDL/build/
+SDL/include
+
 # Linker output
 *.ilk
 *.map
@@ -50,3 +57,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+
