@@ -6,5 +6,5 @@ cd SDL
 mkdir build
 cd build
 ../configure
-make -j6
-sudo make install -j6
+make -j4
+sudo make install -j4
