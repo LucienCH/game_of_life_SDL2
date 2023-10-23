@@ -6,6 +6,8 @@
 #include "Common.h"
 
 void initSDLWindow();
+SDL_Renderer* get_sdl_rederer();
+SDL_Window* get_sdl_window();
 
 
 
