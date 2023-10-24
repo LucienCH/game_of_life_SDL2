@@ -3,7 +3,7 @@
 
 #include "MainWindow.h"
 #include "Common.h"
-
+#include "../include/lifegame.h"
 
 int main(int argc, char* args[]){
 
@@ -13,14 +13,14 @@ int main(int argc, char* args[]){
     //     printf("Erreur lors de l'initialisation de SDL : %s\n", SDL_GetError());
     //     exit(EXIT_FAILURE);
     // }
-
+    printf("start program \n");
+    output_world();    
+    
     // pthread_create(t_sdl, NULL,(void*)initSDLWindow,NULL);
 
     // pthread_join(t_sdl, NULL);
     
     // initSDLWindow();
-
-    printf("Hello world ! \n");
 
     return 0;
 }
