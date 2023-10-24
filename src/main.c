@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <pthread.h>
 
 #include "MainWindow.h"
 #include "Common.h"
 #include "../include/lifegame.h"
+#include "../include/lab1a.h"
+#include <time.h>
 
 int main(int argc, char* args[]){
 
@@ -13,14 +16,21 @@ int main(int argc, char* args[]){
     //     printf("Erreur lors de l'initialisation de SDL : %s\n", SDL_GetError());
     //     exit(EXIT_FAILURE);
     // }
-    printf("start program \n");
-    output_world();    
-    
-    // pthread_create(t_sdl, NULL,(void*)initSDLWindow,NULL);
+       // pthread_create(t_sdl, NULL,(void*)initSDLWindow,NULL);
 
     // pthread_join(t_sdl, NULL);
     
     // initSDLWindow();
+
+    initialize_world();
+    
+    for(int i = 0; i < NUM_GENERATIONS; i++)
+    {
+        next_generation();
+        system("clear");
+        output_world();    
+        usleep(100000); // 100 000 micro seconde = 0,1 seconde
+    }
 
     return 0;
 }

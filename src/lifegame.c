@@ -13,8 +13,7 @@
 #include "../include/lifegame.h"
 
 /* hard-coded world size */
-#define WORLDWIDTH 39
-#define WORLDHEIGHT 20
+// hard-coded value in lifegame.h
 
 /* character representations of cell states */
 #define CHAR_ALIVE '*'
@@ -25,6 +24,15 @@ static int world[WORLDWIDTH][WORLDHEIGHT];
 
 /* next generation cell states */
 static int nextstates[WORLDWIDTH][WORLDHEIGHT];
+
+/*----------- Antoine modifications ----------- */
+
+/* Get the world for other source files */
+int*** get_the_world(void){
+	return &world; 
+}
+
+/*----------- Antoine modifications ----------- */
 
 /* functions to write for Part B of lab */
 void initialize_world_from_file(const char * filename) {
@@ -79,6 +87,18 @@ void initialize_world(void) {
 	world[3][2] = ALIVE;
 	world[3][3] = ALIVE;
 	world[2][3] = ALIVE;
+
+// 	world[2][2] = ALIVE;//haut-gauche
+// 	world[3][2] = ALIVE;//haut-centre
+//	world[4][2] = ALIVE;//haut-droite
+
+// 	world[2][3] = ALIVE;//centre gauche
+// 	world[3][3] = ALIVE;//centre 
+// 	world[4][3] = ALIVE;//centre droit
+	
+// 	world[2][4] = ALIVE;//bas-gauche
+// 	world[3][4] = ALIVE;//bas-centre
+// 	world[4][4] = ALIVE;//bas-droite
 }
 
 int is_World_Empty(void) {

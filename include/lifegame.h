@@ -15,6 +15,15 @@
 #define DEAD 0
 #define ALIVE 1
 
+/*----------- Antoine modifications ----------- */
+int*** get_the_world(void);
+
+/* hard-coded world size */
+#define WORLDWIDTH 39
+#define WORLDHEIGHT 20
+
+/*----------- Antoine modifications ----------- */
+
 /* initialize_world -- set up world, all cells initialized
    to DEAD or ALIVE; all cells in next generation are
    initialized to DEAD */
