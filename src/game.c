@@ -47,5 +47,10 @@ int main(int argc, char* args[]) {
     // SDL_Quit();
 
     printf("Hello world !\n");
+
+
+    // AfficherMatrice();
+    creerMatrice();
     return 0;
+
 }
