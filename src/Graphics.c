@@ -10,18 +10,21 @@ int init_matrix(int width, int height){
     int window_width = 0;
     int window_height = 0;
 
-    // SDL_GetWindowSize(get_sdl_window(), &window_width, &window_height);
+    SDL_GetWindowSize(get_sdl_window(), &window_width, &window_height);
 
     // nb_row = (int)(window_width / (cell_size+2));
     // nb_col =  (int)(window_height / (cell_size+2));
 
+    // SDL_Rect rectangles 
+
     // printf("nb col : %d | nb rows : %d\n", nb_col, nb_row);
 
-    // // printf("W : %d | H ; %d\n", window_width, window_height);
+    // printf("W : %d | H ; %d\n", window_width, window_height);
 
     // nb_col = 100;
     // nb_row = 100;
     SDL_Rect multi_rect[nb_col][nb_row];
+    
     int cpt_col = 1;
     int cpt_row = 1;
     for (int i = 0; i < nb_row; i++){
