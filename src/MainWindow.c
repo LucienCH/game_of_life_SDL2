@@ -10,7 +10,7 @@ void initSDLWindow(){
     sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN);
 
     // Setup renderer
-    sdl_renderer =  SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
+    sdl_renderer =  SDL_CreateRenderer(sdl_window, -1, 0);
 
     // Set render color to red ( background will be rendered in this color )
     SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
