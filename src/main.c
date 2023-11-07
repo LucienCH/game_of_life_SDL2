@@ -2,25 +2,23 @@
 #include <pthread.h>
 
 #include "MainWindow.h"
+#include "Graphics.h"
 #include "Common.h"
 #include "../include/lifegame.h"
+
 
 int main(int argc, char* args[]){
 
     // pthread_t* t_sdl;
 
-    // if (SDL_Init(SDL_INIT_VIDEO) != 0){
-    //     printf("Erreur lors de l'initialisation de SDL : %s\n", SDL_GetError());
-    //     exit(EXIT_FAILURE);
-    // }
-    printf("start program \n");
-    output_world();    
+    if (SDL_Init(SDL_INIT_VIDEO) != 0){
+        printf("Erreur lors de l'initialisation de SDL : %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
     
-    // pthread_create(t_sdl, NULL,(void*)initSDLWindow,NULL);
+    initSDLWindow();
 
-    // pthread_join(t_sdl, NULL);
-    
-    // initSDLWindow();
+    init_matrix(600, 300);
 
     return 0;
 }
