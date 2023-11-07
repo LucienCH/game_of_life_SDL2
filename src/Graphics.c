@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "Common.h"
 
 
 int init_matrix(int width, int height){

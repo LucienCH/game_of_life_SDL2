@@ -10,20 +10,13 @@ void initSDLWindow(){
     sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
     // Setup renderer
-    sdl_renderer =  SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
+    sdl_renderer =  SDL_CreateRenderer(sdl_window, -1,SDL_RENDERER_SOFTWARE);
 
     // Set render color to red ( background will be rendered in this color )
     SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
 
     // Clear winow
     SDL_RenderClear(sdl_renderer);
-
-    // // Creat a rect at pos ( 50, 50 ) that's 50 pixels wide and 50 pixels high.
-    // SDL_Rect r;
-    // r.x = 10;
-    // r.y = 10;
-    // r.w = 10;
-    // r.h = 10;
 
     // Boucle principale (affiche la fenêtre pendant quelques secondes)
     bool quit = false;
@@ -35,8 +28,6 @@ void initSDLWindow(){
                 quit = true;
             }
         }
-        // Ici, vous pouvez ajouter du code pour dessiner quelque chose sur la fenêtre
-        // (ceci est juste un exemple minimal)
 
         // Set render color to red ( background will be rendered in this color )
         SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255 );
@@ -57,6 +48,25 @@ void initSDLWindow(){
     // Libération des ressources et fermeture de SDL
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
+}
+
+void initMenu(){
+
+    // Set render color to red ( background will be rendered in this color )
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255 );
+
+
+    SDL_Rect grid_width_rect;
+    grid_width_rect.x = 0;
+    grid_width_rect.y = 0;
+    grid_width_rect.w = 10;
+    grid_width_rect.y = 10;
+
+    SDL_Rect grid_height_rect;
+    grid_height_rect.x = 0;
+    grid_height_rect.y = 0;
+    grid_height_rect.w = 10;
+    grid_height_rect.y = 10;
 }
 
 SDL_Renderer* get_sdl_rederer(){
