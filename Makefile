@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Iinclude $(shell sdl2-config --cflags) -I.
-LDFLAGS = -export-dynamic $(shell sdl2-config --libs)
+CFLAGS = -Wall -Iinclude $(shell sdl2-config --cflags) -I. -g
+LDFLAGS = -export-dynamic $(shell sdl2-config --libs) -lpthread
 SOURCES = $(wildcard src/*.c)
 OBJECTS = $(patsubst src/%.c,obj/%.o,$(SOURCES))
 EXECUTABLE = bin/game
