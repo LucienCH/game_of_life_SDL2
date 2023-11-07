@@ -1,5 +1,0 @@
-ssh-keygen -t ed25519 -C "chauvin.lucien.pro@gmail.com"
-
-git clone git@github.com:LucienCH/game_of_life_SDL2.git
-
-git remote add SDL2 https://github.com/libsdl-org/SDL.git -t SDL2

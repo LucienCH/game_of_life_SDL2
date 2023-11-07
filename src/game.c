@@ -4,7 +4,10 @@
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_config.h"
 
+
+
 int main(int argc, char* args[]) {
+
     // Initialisation de SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         printf("Erreur lors de l'initialisation de SDL : %s\n", SDL_GetError());
@@ -12,8 +15,6 @@ int main(int argc, char* args[]) {
     }
 
     // -- Tes d'affichage depuis un autre fichier
-
-
 
     // Création de la fenêtre
     SDL_Window* window = SDL_CreateWindow("Exemple SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
@@ -68,15 +69,14 @@ int main(int argc, char* args[]) {
         SDL_RenderPresent(sdl_rend);
 
 
-        // Attendre pendant une courte période (en millisecondes)
-        SDL_Delay(10000); // Attendre 10 seconde
-        quit = true;     // Quitter la boucle
+        // // Attendre pendant une courte période (en millisecondes)
+        // SDL_Delay(10000); // Attendre 10 seconde
+        // quit = true;     // Quitter la boucle
     }
 
     // Libération des ressources et fermeture de SDL
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    printf("Hello world !\n");
     return 0;
 }
