@@ -44,7 +44,7 @@ void initSDLWindow(){
         // Clear winow
         SDL_RenderClear(sdl_renderer);
 
-        init_matrix(640,480);
+        // init_matrix(640,480);
 
 
         
