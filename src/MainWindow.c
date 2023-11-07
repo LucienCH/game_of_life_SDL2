@@ -7,7 +7,7 @@ SDL_Renderer* sdl_renderer;
 
 void initSDLWindow(){
 
-    sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN);
+    sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
     // Setup renderer
     sdl_renderer =  SDL_CreateRenderer(sdl_window, -1, 0);
