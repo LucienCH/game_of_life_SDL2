@@ -12,7 +12,10 @@ int main(int argc, char* args[]){
         exit(EXIT_FAILURE);
     }
     
-    initSDLWindow();
+    if(initSDLWindow() != 0){
+        perror("Cannot init SDL_Window ...");
+        return -1;
+    }
 
     return 0;
 }

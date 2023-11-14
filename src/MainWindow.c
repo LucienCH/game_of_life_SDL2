@@ -1,11 +1,10 @@
 #include "MainWindow.h"
-#include "Common.h"
-#include "Graphics.h"
+
 
 SDL_Window* sdl_window;
 SDL_Renderer* sdl_renderer;
 
-void initSDLWindow(){
+int initSDLWindow(){
 
     sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
@@ -21,6 +20,13 @@ void initSDLWindow(){
     // Boucle principale (affiche la fenêtre pendant quelques secondes)
     bool quit = false;
     SDL_Event e;
+    
+    // Initialize menu 
+    if(initMenu() != 0){
+        perror("Cannot initialize menu ");
+        return -1;
+    }
+
 
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
@@ -35,9 +41,11 @@ void initSDLWindow(){
         // Clear winow
         SDL_RenderClear(sdl_renderer);
 
-        init_matrix(640,480);
+        //init_matrix(640,480);
+        initMenu();
+        dispMenu(sdl_renderer);
 
-
+        usleep(16000);
         
 
         // // Attendre pendant une courte période (en millisecondes)
@@ -48,26 +56,9 @@ void initSDLWindow(){
     // Libération des ressources et fermeture de SDL
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
+    return 0;
 }
 
-void initMenu(){
-
-    // Set render color to red ( background will be rendered in this color )
-    SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255 );
-
-
-    SDL_Rect grid_width_rect;
-    grid_width_rect.x = 0;
-    grid_width_rect.y = 0;
-    grid_width_rect.w = 10;
-    grid_width_rect.y = 10;
-
-    SDL_Rect grid_height_rect;
-    grid_height_rect.x = 0;
-    grid_height_rect.y = 0;
-    grid_height_rect.w = 10;
-    grid_height_rect.y = 10;
-}
 
 SDL_Renderer* get_sdl_rederer(){
     return sdl_renderer;

@@ -2,7 +2,7 @@
 #include "Common.h"
 
 
-int init_matrix(int width, int height){
+int initMatrix(int width, int height){
 
     int nb_col = 100;
     int nb_row = 100;

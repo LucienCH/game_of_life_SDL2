@@ -3,6 +3,6 @@
 
 #include "Common.h"
 
-int init_matrix(int w, int h);
+int initMatrix(int w, int h);
 
 #endif
