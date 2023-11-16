@@ -43,4 +43,4 @@ int init_matrix(int width, int height){
 
     return 0;
 
-}
+} 

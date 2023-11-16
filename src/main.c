@@ -8,6 +8,7 @@
 #include "../include/lab1a.h"
 #include <time.h>
 
+extern int  num_generation;
 int main(int argc, char* args[]){
 
     pthread_t* t_sdl;
@@ -22,9 +23,11 @@ int main(int argc, char* args[]){
     
     // initSDLWindow();
 
-    initialize_world();
-    
-    for(int i = 0; i < NUM_GENERATIONS; i++)
+    initialize_world(TAILLE_100);
+    // initialize_world();
+    // initialize_world();
+
+    for(int i = 0; i < num_generation; i++)
     {
         next_generation();
         system("clear");

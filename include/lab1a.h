@@ -7,7 +7,7 @@
 #define LAB1A_H_
 
 /* number of generations to evolve the world */
-#define NUM_GENERATIONS 50
+//#define NUM_GENERATIONS 50 //modifiable value in initialize_world
 
 /* this function should set the state of all
    the cells in the next generation and call

@@ -19,6 +19,10 @@
 #define CHAR_ALIVE '*'
 #define CHAR_DEAD ' '
 
+int worldWidth = 0;
+int worldHeight = 0;
+int num_generation =0;
+
 /* current cell states of the world */
 static int world[WORLDWIDTH][WORLDHEIGHT];
 
@@ -75,11 +79,33 @@ void save_world_to_file(const char * filename) {
 
 /* initializes the world to a hard-coded pattern, and resets
    all the cells in the next generation to DEAD */
-void initialize_world(void) {
+void initialize_world(SIZE_MONDE Taille) {
 	int i, j;
 
-	for (i = 0; i < WORLDWIDTH; i++)
-		for (j = 0; j < WORLDHEIGHT; j++)
+	switch (Taille)
+	{
+	case TAILLE_10:
+		worldHeight = 10;
+		worldWidth = 10;
+		num_generation = 50;
+		break;
+	case TAILLE_100:
+		worldHeight = 90;
+		worldWidth = 90;
+		num_generation = 500;
+		break;
+	case TAILLE_500:
+		worldHeight = 500;
+		worldWidth = 500;
+		num_generation = 2500;
+		break;
+	default:
+		perror("--- Value for the world incompatble\n"); //shouldn't be another value
+		break;
+	}
+
+	for (i = 0; i < worldWidth; i++)
+		for (j = 0; j < worldHeight; j++)
 			world[i][j] = nextstates[i][j] = DEAD;
 	/* pattern "glider" */
 	world[1][2] = ALIVE;
@@ -102,28 +128,28 @@ void initialize_world(void) {
 }
 
 int is_World_Empty(void) {
-	for (int i = 0; i < WORLDWIDTH; i++)
-		for (int j = 0; j < WORLDHEIGHT; j++)
+	for (int i = 0; i < worldWidth; i++)
+		for (int j = 0; j < worldHeight; j++)
 			if (world[i][j] == ALIVE) return 0;
 	return 1;
 }
 
 int get_world_width(void) {
-	return WORLDWIDTH;
+	return worldWidth;
 }
 
 int get_world_height(void) {
-	return WORLDHEIGHT;
+	return worldHeight;
 }
 
 int get_cell_state(int x, int y) {
-	if (x < 0 || x >= WORLDWIDTH || y < 0 || y >= WORLDHEIGHT)
+	if (x < 0 || x >= worldWidth || y < 0 || y >= worldWidth)
 		return DEAD;
 	return world[x][y];
 }
 
 void set_cell_state(int x, int y, int state) {
-	if (x < 0 || x >= WORLDWIDTH || y < 0 || y >= WORLDHEIGHT) {
+	if (x < 0 || x >= worldWidth || y < 0 || y >= worldHeight) {
 		fprintf(stderr,"Error: coordinates (%d,%d) are invalid.\n", x, y);
 		abort();
 	}
@@ -132,8 +158,8 @@ void set_cell_state(int x, int y, int state) {
 
 void finalize_evolution(void) {
 	int x, y;
-	for (x = 0; x < WORLDWIDTH; x++) {
-		for (y = 0; y < WORLDHEIGHT; y++) {
+	for (x = 0; x < worldWidth; x++) {
+		for (y = 0; y < worldHeight; y++) {
 			world[x][y] = nextstates[x][y];
 			nextstates[x][y] = DEAD;
 		}
@@ -141,21 +167,21 @@ void finalize_evolution(void) {
 }
 
 void output_world(void) {
-	char worldstr[2*WORLDWIDTH+2];
+	char worldstr[2*worldWidth+2];
 	int i, j;
 
-	worldstr[2*WORLDWIDTH+1] = '\0';
+	worldstr[2*worldWidth+1] = '\0';
 	// start the grid 
 	worldstr[0] = '+'; //print + for the first column 
-	for (i = 1; i < 2*WORLDWIDTH; i++)
+	for (i = 1; i < 2*worldWidth; i++)
 		worldstr[i] = '-'; //print - from the first column to the last but one
-	worldstr[2*WORLDWIDTH] = '+'; //print + for the last  column
+	worldstr[2*worldWidth] = '+'; //print + for the last  column
 	puts(worldstr);
 	// print the content of the grid
-	for (i = 0; i <= 2*WORLDWIDTH; i+=2)
+	for (i = 0; i <= 2*worldWidth; i+=2)
 		worldstr[i] = '|'; //create the skeleton of the grid by writing | each two cases
-	for (i = 0; i < WORLDHEIGHT; i++) {
-		for (j = 0; j < WORLDWIDTH; j++)
+	for (i = 0; i < worldHeight; i++) {
+		for (j = 0; j < worldWidth; j++)
 			worldstr[2*j+1] = world[j][i] == ALIVE ? CHAR_ALIVE : CHAR_DEAD; //each two cases, check the value in world and put 
 			// the character regarding the state of the cell
 			
@@ -163,8 +189,8 @@ void output_world(void) {
 	}
 	// end of the grid 
 	worldstr[0] = '+'; //print + for the first column 
-	for (i = 1; i < 2*WORLDWIDTH; i++)
+	for (i = 1; i < 2*worldWidth; i++)
 		worldstr[i] = '-'; //print - from the first column to the last but one
-	worldstr[2*WORLDWIDTH] = '+'; //print + for the last  column
+	worldstr[2*worldWidth] = '+'; //print + for the last  column
 	puts(worldstr);
 }

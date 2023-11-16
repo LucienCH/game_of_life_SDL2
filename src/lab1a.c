@@ -14,6 +14,9 @@
 #include <stdio.h>
 #include "../include/lab1a.h"
 
+extern int worldWidth;
+extern int worldHeight;
+
 /* number of generations to evolve the world */
 // #define NUM_GENERATIONS 50 // Write in lab1a.h
 
@@ -34,14 +37,13 @@
 
 // 	return 0;
 // }
-
 void next_generation(void) {
 	/* TODO: for every cell, set the state in the next
 	   generation according to the Game of Life rules
 
 	   Hint: use get_next_state(x,y) and set_next_state(x,y) */
-		for(int x = 0 ; x < WORLDWIDTH ; x++){
-			for(int y = 0 ; y < WORLDHEIGHT ; y++){
+		for(int x = 0 ; x < worldWidth ; x++){
+			for(int y = 0 ; y < worldHeight ; y++){
 				set_cell_state(x,y,get_next_state(x,y));
 			}
 		}
