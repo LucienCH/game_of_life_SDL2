@@ -15,6 +15,8 @@
 #define DEAD 0
 #define ALIVE 1
 
+
+#include "Common.h"  // include/Common.h
 /*----------- Antoine modifications ----------- */
 int*** get_the_world(void);
 
@@ -69,6 +71,7 @@ void output_world(void);
 
 /* functions to implement for Part B */
 void initialize_world_from_file(const char * filename);
-void save_world_to_file(const char * filename);
+//void save_world_to_file(const char * filename);
+void save_world_to_file(char * worldstr);
 
 #endif /* LIFEGAME_H_ */

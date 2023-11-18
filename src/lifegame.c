@@ -40,6 +40,7 @@ int*** get_the_world(void){
 
 /* functions to write for Part B of lab */
 void initialize_world_from_file(const char * filename) {
+	
 	/* TODO: read the state of the world from a file with
 	   name "filename". Assume file exists, is readable, and
 	   the ith character of the jth line (zero-indexed) describes
@@ -57,10 +58,14 @@ void initialize_world_from_file(const char * filename) {
 	   Also need to reset the next generation to DEAD
 	 */
 
-
+	
 }
-
-void save_world_to_file(const char * filename) {
+//void save_world_to_file(const char * filename) {
+void save_world_to_file(char * worldstr) {
+	static int i = 1;
+	if(i == 10){
+		i = 0; // avoid overflow of name_file regarding the incrmentation of i;
+	}
 	/* TODO: write the state of the world into a file with
 	   name "filename". Assume the file can be created, or if
 	   the file exists, overwrite the file. The ith character
@@ -72,7 +77,24 @@ void save_world_to_file(const char * filename) {
 	   it to resume a game later
 	 */
 
-
+	FILE *fd;
+	char name_file [15] = "./Save_world";  
+	sprintf((name_file+12),"_%d",i); //./Save_world has 12 char
+    fd = fopen(name_file,"w+");
+    if(fd == NULL){
+		perror("fd= NULL\n");
+	}
+	for(int y = 0 ; y <  worldWidth ; y ++){
+		for(int x = 0 ; x < worldHeight ; x ++){
+			if(world[x][y] == ALIVE){
+				fprintf(fd,"|%c",CHAR_ALIVE); // print "|*" each time we found an alive cell
+			}else{
+				fprintf(fd,"|%c",CHAR_DEAD); // prin "| " each time we found a dead cell
+			}
+		}
+		fprintf(fd,"|\n");
+	}	
+	close(fd);
 }
 
 /* you shouldn't need to edit anything below this line */
@@ -90,8 +112,8 @@ void initialize_world(SIZE_MONDE Taille) {
 		num_generation = 50;
 		break;
 	case TAILLE_100:
-		worldHeight = 90;
-		worldWidth = 90;
+		worldHeight = 50;
+		worldWidth = 50;
 		num_generation = 500;
 		break;
 	case TAILLE_500:
@@ -162,7 +184,7 @@ void finalize_evolution(void) {
 		for (y = 0; y < worldHeight; y++) {
 			world[x][y] = nextstates[x][y];
 			nextstates[x][y] = DEAD;
-		}
+		} 
 	}
 }
 
@@ -185,7 +207,7 @@ void output_world(void) {
 			worldstr[2*j+1] = world[j][i] == ALIVE ? CHAR_ALIVE : CHAR_DEAD; //each two cases, check the value in world and put 
 			// the character regarding the state of the cell
 			
-		puts(worldstr);
+	puts(worldstr);		
 	}
 	// end of the grid 
 	worldstr[0] = '+'; //print + for the first column 

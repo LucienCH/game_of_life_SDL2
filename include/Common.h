@@ -8,6 +8,7 @@
 #include "SDL/include/SDL.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h> // file library
 
 #include <unistd.h> //for us delay (in main.c)
 #include <pthread.h> // multi-thread utlization (main.c)

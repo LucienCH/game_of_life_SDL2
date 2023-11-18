@@ -23,17 +23,25 @@ int main(int argc, char* args[]){
     
     // initSDLWindow();
 
+
+
     initialize_world(TAILLE_100);
     // initialize_world();
     // initialize_world();
 
-    for(int i = 0; i < num_generation; i++)
+    for(int i = 0; i < 50; i++)
     {
         next_generation();
         system("clear");
         output_world();    
         usleep(100000); // 100 000 micro seconde = 0,1 seconde
     }
-
+      save_world_to_file("a");
     return 0;
+}
+
+void * thread_initialize_world(void* arg){
+   
+    next_generation(); // à modifier / completer ...
+
 }
