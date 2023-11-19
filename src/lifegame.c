@@ -39,8 +39,7 @@ int*** get_the_world(void){
 /*----------- Antoine modifications ----------- */
 
 /* functions to write for Part B of lab */
-void initialize_world_from_file(const char * filename) {
-	
+void initialize_world_from_file(char * name_file) {
 	/* TODO: read the state of the world from a file with
 	   name "filename". Assume file exists, is readable, and
 	   the ith character of the jth line (zero-indexed) describes
@@ -57,15 +56,58 @@ void initialize_world_from_file(const char * filename) {
 
 	   Also need to reset the next generation to DEAD
 	 */
-
 	
-}
-//void save_world_to_file(const char * filename) {
-void save_world_to_file(char * worldstr) {
-	static int i = 1;
-	if(i == 10){
-		i = 0; // avoid overflow of name_file regarding the incrmentation of i;
+	char * rcv_frm_file = (char *) malloc(sizeof(char));
+	FILE *fd;
+	fd = fopen(name_file,"r+");	
+	    if(fd == NULL){
+		perror("fd= NULL can't open file \n");
 	}
+	for(int y = 0 ; y < WORLDHEIGHT  ; y ++){
+		int j = 0;
+		for(int x = 0 ; x < WORLDWIDTH*2 ; x ++){
+			if(fscanf(fd,"%c",rcv_frm_file) != EOF){
+
+			printf("%c",(*rcv_frm_file));
+			if(*rcv_frm_file == '|' ){
+				;
+			}else if(*rcv_frm_file == '\n' ){
+				worldWidth = x/2; //because the real grid doesn't contain "|" characteres
+				break;
+			}else if(*rcv_frm_file == CHAR_ALIVE){
+				world[j][y] = ALIVE; 
+				j++;
+			}else{
+				world[j][y] = DEAD;
+				j++;
+			}
+			}else{
+				perror("end file");
+				break;
+			}
+		}
+
+		fscanf(fd,"%c",rcv_frm_file);
+		lseek(fd,-1,SEEK_CUR); //actuellement inutile (ne marche pas)
+		if(*rcv_frm_file == '\n' ){
+		 	worldHeight = y+1; // because worldHeight is the size of the grid, not the index
+		 	break;
+		}
+	}	
+	fclose(fd);
+	if(is_World_Empty){
+		perror("Read File Failled\n"); // s'active malgré l'init from file ?
+	}
+	// Intitialize the next generation to DEAD
+	for (int x = 0; x < worldWidth; x++) {
+		for (int y = 0; y < worldHeight; y++) {
+			nextstates[x][y] = DEAD;
+		} 
+	}
+	return;
+}
+
+void save_world_to_file(char * name_file) {
 	/* TODO: write the state of the world into a file with
 	   name "filename". Assume the file can be created, or if
 	   the file exists, overwrite the file. The ith character
@@ -75,17 +117,14 @@ void save_world_to_file(char * worldstr) {
 	   This file should be readable using the function
 	   initialize_world_from_file(filename) above; we can use
 	   it to resume a game later
-	 */
-
+	 */	
 	FILE *fd;
-	char name_file [15] = "./Save_world";  
-	sprintf((name_file+12),"_%d",i); //./Save_world has 12 char
-    fd = fopen(name_file,"w+");
+	fd = fopen(name_file,"w+");
     if(fd == NULL){
-		perror("fd= NULL\n");
+		perror("fd= NULL can't open file \n");
 	}
-	for(int y = 0 ; y <  worldWidth ; y ++){
-		for(int x = 0 ; x < worldHeight ; x ++){
+	for(int y = 0 ; y <  worldHeight ; y ++){
+		for(int x = 0 ; x < worldWidth ; x ++){
 			if(world[x][y] == ALIVE){
 				fprintf(fd,"|%c",CHAR_ALIVE); // print "|*" each time we found an alive cell
 			}else{
@@ -93,8 +132,9 @@ void save_world_to_file(char * worldstr) {
 			}
 		}
 		fprintf(fd,"|\n");
-	}	
-	close(fd);
+	}
+	fprintf(fd,"\n");
+	fclose(fd);
 }
 
 /* you shouldn't need to edit anything below this line */

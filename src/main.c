@@ -24,11 +24,11 @@ int main(int argc, char* args[]){
     // initSDLWindow();
 
 
-
-    initialize_world(TAILLE_100);
+    initialize_world_from_file("Save_world");
+    //initialize_world(TAILLE_100);
     // initialize_world();
     // initialize_world();
-
+    getchar();
     for(int i = 0; i < 50; i++)
     {
         next_generation();
@@ -36,7 +36,7 @@ int main(int argc, char* args[]){
         output_world();    
         usleep(100000); // 100 000 micro seconde = 0,1 seconde
     }
-      save_world_to_file("a");
+    save_world_to_file("./Save_world_2");
     return 0;
 }
 

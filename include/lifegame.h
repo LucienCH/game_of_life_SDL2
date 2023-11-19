@@ -70,8 +70,8 @@ void finalize_evolution(void);
 void output_world(void);
 
 /* functions to implement for Part B */
-void initialize_world_from_file(const char * filename);
+void initialize_world_from_file(char * name_file);
 //void save_world_to_file(const char * filename);
-void save_world_to_file(char * worldstr);
+void save_world_to_file(char * name_file);
 
 #endif /* LIFEGAME_H_ */
