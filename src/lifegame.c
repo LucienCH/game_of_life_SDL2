@@ -108,6 +108,7 @@ void initialize_world_from_file(char * name_file) {
 		 	break;
 		}
 	}	
+	free(rcv_frm_file);
 	fclose(fd);
 	if(is_World_Empty()){
 		perror("Read File Failled\n");
