@@ -47,4 +47,4 @@ int initMatrix(int width, int height){
 
     return 0;
 
-}
+} 

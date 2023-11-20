@@ -15,10 +15,34 @@
 #define DEAD 0
 #define ALIVE 1
 
+
+#include "Common.h"  // include/Common.h
+/*----------- Antoine modifications ----------- */
+int*** get_the_world(void);
+
+/* hard-coded world size */
+#define WORLDWIDTH 500 // 500 is the max range for our code and this value must be constant
+#define WORLDHEIGHT 500
+
+/* enum for the switch-case in lifegame.c in the initialize_world
+ * function which allows us to choose three kind of size from the
+ * grapic interface
+ */
+typedef enum SIZE_MONDE{
+   TAILLE_10 =1 ,
+   TAILLE_100 =2,
+   TAILLE_500 =3
+}SIZE_MONDE;
+
+
+
+/*----------- Antoine modifications ----------- */
+void grid_null(void);
+
 /* initialize_world -- set up world, all cells initialized
    to DEAD or ALIVE; all cells in next generation are
    initialized to DEAD */
-void initialize_world(void);
+void initialize_world(enum SIZE_MONDE);
 
 /* Returns 1 when all the cells are DEAD */
 int is_World_Empty(void);
@@ -47,7 +71,8 @@ void finalize_evolution(void);
 void output_world(void);
 
 /* functions to implement for Part B */
-void initialize_world_from_file(const char * filename);
-void save_world_to_file(const char * filename);
+void initialize_world_from_file(char * name_file);
+//void save_world_to_file(const char * filename);
+void save_world_to_file(char * name_file);
 
 #endif /* LIFEGAME_H_ */
