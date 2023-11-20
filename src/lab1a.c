@@ -59,12 +59,12 @@ int get_next_state(int x, int y) {
 	   neighbors */
 	int dead_or_alive = get_cell_state(x,y);
 	if(dead_or_alive == DEAD ){
-		if(num_neighbors(x,y) == 2 ){ //cells birth only and only if there is two cells alive around
+		if(num_neighbors(x,y) == 3 ){ //cells birth only and only if there is two cells alive around
 			return ALIVE;
 		}
 	}else{
 		if(2 <= num_neighbors(x,y) && num_neighbors(x,y) <= 3){ //cells die if more than 3 cells alive around ... 
-		// ... or die if les than 2 cells around
+		// ... or die if less than 2 cells around
 			return ALIVE;
 		}
 	}

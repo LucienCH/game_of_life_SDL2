@@ -22,21 +22,17 @@ int main(int argc, char* args[]){
     // pthread_join(t_sdl, NULL);
     
     // initSDLWindow();
-
-
-    initialize_world_from_file("Save_world");
+    //grid_null();
+    initialize_world_from_file("./gun_50");
     //initialize_world(TAILLE_100);
-    // initialize_world();
-    // initialize_world();
-    getchar();
-    for(int i = 0; i < 50; i++)
+    for(int i = 0; i < 250; i++)
     {
         next_generation();
         system("clear");
         output_world();    
         usleep(100000); // 100 000 micro seconde = 0,1 seconde
     }
-    save_world_to_file("./Save_world_2");
+    save_world_to_file("./gun_50_add_250");
     return 0;
 }
 

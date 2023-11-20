@@ -37,6 +37,7 @@ typedef enum SIZE_MONDE{
 
 
 /*----------- Antoine modifications ----------- */
+void grid_null(void);
 
 /* initialize_world -- set up world, all cells initialized
    to DEAD or ALIVE; all cells in next generation are

@@ -37,6 +37,19 @@ int*** get_the_world(void){
 }
 
 /*----------- Antoine modifications ----------- */
+/* Generate Grid_null preset
+ */
+void grid_null(void){
+		worldHeight = 250;
+		worldWidth = 250;
+		num_generation = 500;
+	for (int x = 0; x < worldWidth; x++) {
+		for (int y = 0; y < worldHeight; y++) {
+			world[x][y] = DEAD;
+		} 
+	}
+	save_world_to_file("./Grid_null_250");
+}
 
 /* functions to write for Part B of lab */
 void initialize_world_from_file(char * name_file) {
@@ -62,6 +75,7 @@ void initialize_world_from_file(char * name_file) {
 	fd = fopen(name_file,"r+");	
 	    if(fd == NULL){
 		perror("fd= NULL can't open file \n");
+		exit(-1);
 	}
 	for(int y = 0 ; y < WORLDHEIGHT  ; y ++){
 		int j = 0;
@@ -95,8 +109,8 @@ void initialize_world_from_file(char * name_file) {
 		}
 	}	
 	fclose(fd);
-	if(is_World_Empty){
-		perror("Read File Failled\n"); // s'active malgré l'init from file ?
+	if(is_World_Empty()){
+		perror("Read File Failled\n");
 	}
 	// Intitialize the next generation to DEAD
 	for (int x = 0; x < worldWidth; x++) {
