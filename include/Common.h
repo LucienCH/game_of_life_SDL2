@@ -8,5 +8,9 @@
 #include "SDL/include/SDL.h"
 
 
+typedef struct{
+    int arg1;
+    int arg2;
+}arguments_t;
 
 #endif

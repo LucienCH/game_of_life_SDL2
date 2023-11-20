@@ -29,25 +29,29 @@ int initSDLWindow(){
 
 
     while (!quit) {
-        while (SDL_PollEvent(&e) != 0) {
-            if (e.type == SDL_QUIT) {
-                quit = true;
-            }
-        }
-
         // Set render color to red ( background will be rendered in this color )
-        SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255 );
+        SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
 
         // Clear winow
         SDL_RenderClear(sdl_renderer);
-
-        //init_matrix(640,480);
-        initMenu();
         dispMenu(sdl_renderer);
-
-        usleep(16000);
+ 
+        while (SDL_PollEvent(&e) != 0) {
+            
+            switch (e.type)
+            {
+            case SDL_QUIT:
+                quit = true;
+                break;
+            
+            case SDL_MOUSEBUTTONDOWN:
+                printf("ok\n");
+                break;
+            
+            }
+        }
         
-
+        
         // // Attendre pendant une courte période (en millisecondes)
         // SDL_Delay(10000); // Attendre 10 seconde
         // quit = true;     // Quitter la boucle

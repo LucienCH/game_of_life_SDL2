@@ -48,6 +48,6 @@ void dispMenu(SDL_Renderer* sdl_renderer){
     SDL_RenderPresent(get_sdl_rederer()); 
 }
 
-SDL_Rect** get_menu_rect(){
+SDL_Rect* get_menu_rect(){
     return menu_rect;
 }

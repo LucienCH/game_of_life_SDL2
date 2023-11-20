@@ -16,6 +16,6 @@ int main(int argc, char* args[]){
         perror("Cannot init SDL_Window ...");
         return -1;
     }
-
+    
     return 0;
 }
