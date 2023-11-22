@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "Common.h"
 
-void initSDLWindow();
+int initSDLWindow(int wSize);
 SDL_Renderer* get_sdl_rederer();
 SDL_Window* get_sdl_window();
 

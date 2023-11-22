@@ -1,63 +1,53 @@
-#include "MainWindow.h"
 #include "Common.h"
-#include "Graphics.h"
+
 
 SDL_Window* sdl_window;
 SDL_Renderer* sdl_renderer;
 
-void initSDLWindow(){
+int initSDLWindow(int wSize){
 
-    sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,wSize,wSize,SDL_WINDOW_SHOWN);
 
     // Setup renderer
-    sdl_renderer =  SDL_CreateRenderer(sdl_window, -1, 0);
-
-    // Set render color to red ( background will be rendered in this color )
-    SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
-
-    // Clear winow
-    SDL_RenderClear(sdl_renderer);
-
-    // // Creat a rect at pos ( 50, 50 ) that's 50 pixels wide and 50 pixels high.
-    // SDL_Rect r;
-    // r.x = 10;
-    // r.y = 10;
-    // r.w = 10;
-    // r.h = 10;
+    sdl_renderer =  SDL_CreateRenderer(sdl_window, -1,SDL_RENDERER_SOFTWARE);
+    
 
     // Boucle principale (affiche la fenêtre pendant quelques secondes)
     bool quit = false;
     SDL_Event e;
 
+    // Set render color to red ( background will be rendered in this color )
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
+
+    // Clear winow
+    SDL_RenderClear(sdl_renderer);
+
+    initMatrix(0, 0);
+    SDL_RenderPresent(get_sdl_rederer());
+
+
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
-            if (e.type == SDL_QUIT) {
+            
+            switch (e.type)
+            {
+            case SDL_QUIT:
                 quit = true;
+                break;
             }
         }
-        // Ici, vous pouvez ajouter du code pour dessiner quelque chose sur la fenêtre
-        // (ceci est juste un exemple minimal)
-
-        // Set render color to red ( background will be rendered in this color )
-        SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255 );
-
-        // Clear winow
-        SDL_RenderClear(sdl_renderer);
-
-        // init_matrix(640,480);
-
-
-        
-
-        // // Attendre pendant une courte période (en millisecondes)
-        // SDL_Delay(10000); // Attendre 10 seconde
-        // quit = true;     // Quitter la boucle
+        usleep(16000);
+        change_grid_state();
     }
 
     // Libération des ressources et fermeture de SDL
+    freeSDLRect();
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
+    run_flag = 0;
+    return 0;
 }
+
 
 SDL_Renderer* get_sdl_rederer(){
     return sdl_renderer;

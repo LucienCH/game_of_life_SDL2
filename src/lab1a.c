@@ -14,34 +14,13 @@
 #include <stdio.h>
 #include "../include/lab1a.h"
 
-/* number of generations to evolve the world */
-// #define NUM_GENERATIONS 50 // Write in lab1a.h
-
-// int main(void)
-// {
-// 	int n;
-
-// 	/* TODO: initialize the world */
-
-
-// 	for (n = 0; n < NUM_GENERATIONS; n++){
-// 		next_generation();
-// 		/* TODO (optional): Visualise world in each generation */
-// 	}
-
-// 	/* TODO: output final world state */
-
-
-// 	return 0;
-// }
-
 void next_generation(void) {
 	/* TODO: for every cell, set the state in the next
 	   generation according to the Game of Life rules
 
 	   Hint: use get_next_state(x,y) and set_next_state(x,y) */
-		for(int x = 0 ; x < WORLDWIDTH ; x++){
-			for(int y = 0 ; y < WORLDHEIGHT ; y++){
+		for(int x = 0 ; x < worldWidth ; x++){
+			for(int y = 0 ; y < worldHeight ; y++){
 				set_cell_state(x,y,get_next_state(x,y));
 			}
 		}
@@ -57,12 +36,12 @@ int get_next_state(int x, int y) {
 	   neighbors */
 	int dead_or_alive = get_cell_state(x,y);
 	if(dead_or_alive == DEAD ){
-		if(num_neighbors(x,y) == 2 ){ //cells birth only and only if there is two cells alive around
+		if(num_neighbors(x,y) == 3 ){ //cells birth only and only if there is two cells alive around
 			return ALIVE;
 		}
 	}else{
 		if(2 <= num_neighbors(x,y) && num_neighbors(x,y) <= 3){ //cells die if more than 3 cells alive around ... 
-		// ... or die if les than 2 cells around
+		// ... or die if less than 2 cells around
 			return ALIVE;
 		}
 	}

@@ -3,6 +3,8 @@
 
 #include "Common.h"
 
-int init_matrix(int w, int h);
+int initMatrix(int w, int h);
+void change_grid_state();
+void freeSDLRect();
 
 #endif
