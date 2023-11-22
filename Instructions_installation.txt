@@ -22,4 +22,10 @@ cd bin/
 
 
 
+Le code reste disponible sur ce dépôt GIT : 
+
+https://github.com/LucienCH/game_of_life_SDL2.git
+
+
+
 
