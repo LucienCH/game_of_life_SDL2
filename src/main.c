@@ -18,7 +18,7 @@ void* thread_initialize_world(void* arg){
         printf("\rNombre de generations : %llu", num_generation);
         fflush(stdout);
         next_generation();
-        usleep(50000); // 0.5 secondes;
+        usleep(100000); // 0.05 secondes;
         num_generation++;
     }
     printf("\n");
