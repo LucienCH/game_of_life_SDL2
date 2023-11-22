@@ -11,6 +11,8 @@ void* thread_initialize_world(void* arg){
 
     //initialize_world_from_file( ((struct arguments_s*)arg)->file_name );
     //initialize_world(TAILLE_100);
+    system("clear");
+    printf("Fermer la fenetre SDL pour finir le jeu\n");
     
     while(run_flag){
         printf("\rNombre de generations : %llu", num_generation);
@@ -52,6 +54,8 @@ void* thread_initialize_world(void* arg){
 
 int grid_size_user(){
     int size = 0;
+    int ch;
+    int nbytes = 0;
     
     printf("Selectioner la taille de la grille\n\n");
     printf("1 -- 50x50 \n");
@@ -59,7 +63,14 @@ int grid_size_user(){
     printf("3 -- 150x150\n");
 
     printf("Choix : ");
-    scanf("%d", &size);
+    nbytes = scanf("%d", &size);
+
+    if(nbytes == 0){
+        printf("Pas un entier ! \n");
+        do {
+            ch = getchar();
+        } while ((ch != EOF) && (ch != '\n'));
+    }
     
     if( size < 1 || size > 3){
         printf("Choix impossible ! \n");
@@ -72,14 +83,23 @@ int grid_size_user(){
 int grid_select_user(){
 
     int choice = 0;
+    int nbytes = 0;
+    int ch;
 
     printf("Selectioner le type de grille à utiliser\n\n");
     printf("1 -- aléatoir\n");
     printf("2 -- fichier de preset\n");
     
     printf("Votre choix : ");
-    scanf("%d", &choice);
-
+    nbytes = scanf("%d", &choice);
+    
+    if(nbytes == 0){
+        printf("Pas un entier ! \n");
+        do {
+            ch = getchar();
+        } while ((ch != EOF) && (ch != '\n'));
+    }
+    
     if(choice < 1 || choice > 2){
         printf("Choix impossible ! \n");
         return -1;
