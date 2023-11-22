@@ -36,7 +36,7 @@ int initSDLWindow(int wSize){
                 break;
             }
         }
-        usleep(16000);
+        usleep(1);
         change_grid_state();
     }
 

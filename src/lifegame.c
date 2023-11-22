@@ -41,14 +41,14 @@ void grid_null(void){
 
 void random_grid(void){
 	srand(time(NULL));
-	double random_num = 0;
+	int random_num = 0;
 
 	
 	for(int x = 0; x < worldWidth; x++){
 		for(int y = 0; y < worldHeight; y++){
-			random_num = (double) rand() / RAND_MAX;
+			random_num = rand() % 100 + 1;
 
-			if(random_num >= 0.5){
+			if(random_num >= 50){
 				world[x][y] = DEAD;
 			}else{
 				world[x][y] = ALIVE;
