@@ -1,0 +1,25 @@
+Installation du jeu de la vie en graphique.
+
+Il faut absolument avoir une connexion à internet pour pouvoir installer le jeu
+des dépendances (SDL2 et d'autres paquets ont besoin d'être téléchargés).
+
+1 -- Se placer à la racine du jeu et exécuter l'installateur en tant que super-utilisateur.
+
+sudo ./install.sh
+
+(l'installateur va alors télécharger et compiler les modules nécessaires à l'utilisation de la bibliothèque SDL2)
+
+2 -- Compiler le projet :
+
+make all 
+
+3 -- Executer le projet 
+
+cd bin/
+./game
+
+4 -- Suivre les instructions du jeu pour parametrer la génération et l'affichage.
+
+
+
+
