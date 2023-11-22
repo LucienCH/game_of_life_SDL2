@@ -21,17 +21,17 @@
 int*** get_the_world(void);
 
 /* hard-coded world size */
-#define WORLDWIDTH 500 // 500 is the max range for our code and this value must be constant
-#define WORLDHEIGHT 500
+#define WORLDWIDTH 150 // 150 is the max range for our code and this value must be constant
+#define WORLDHEIGHT 150
 
 /* enum for the switch-case in lifegame.c in the initialize_world
  * function which allows us to choose three kind of size from the
  * grapic interface
  */
 typedef enum SIZE_MONDE{
-   TAILLE_10 =1 ,
-   TAILLE_100 =2,
-   TAILLE_500 =3
+   TAILLE_50 = 1,
+   TAILLE_100 = 2,
+   TAILLE_150 = 3
 }SIZE_MONDE;
 
 

@@ -5,23 +5,12 @@
  *      Author:
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-
-#include "../include/lifegame.h"
-
-/* hard-coded world size */
-// hard-coded value in lifegame.h
+#include "lifegame.h"
+#include "Common.h"
 
 /* character representations of cell states */
 #define CHAR_ALIVE '*'
 #define CHAR_DEAD ' '
-
-int worldWidth = 0;
-int worldHeight = 0;
-int num_generation =0;
 
 /* current cell states of the world */
 static int world[WORLDWIDTH][WORLDHEIGHT];
@@ -33,22 +22,40 @@ static int nextstates[WORLDWIDTH][WORLDHEIGHT];
 
 /* Get the world for other source files */
 int*** get_the_world(void){
-	return &world; 
+	return &world;
 }
 
 /*----------- Antoine modifications ----------- */
 /* Generate Grid_null preset
  */
 void grid_null(void){
-		worldHeight = 250;
-		worldWidth = 250;
-		num_generation = 500;
+		// worldHeight = 250;
+		// worldWidth = 250;
 	for (int x = 0; x < worldWidth; x++) {
 		for (int y = 0; y < worldHeight; y++) {
 			world[x][y] = DEAD;
 		} 
 	}
 	save_world_to_file("./Grid_null_250");
+}
+
+void random_grid(void){
+	srand(time(NULL));
+	double random_num = 0;
+
+	
+	for(int x = 0; x < worldWidth; x++){
+		for(int y = 0; y < worldHeight; y++){
+			random_num = (double) rand() / RAND_MAX;
+
+			if(random_num >= 0.5){
+				world[x][y] = DEAD;
+			}else{
+				world[x][y] = ALIVE;
+			}
+		}
+	}
+
 }
 
 /* functions to write for Part B of lab */
@@ -70,11 +77,12 @@ void initialize_world_from_file(char * name_file) {
 	   Also need to reset the next generation to DEAD
 	 */
 	
-	char * rcv_frm_file = (char *) malloc(sizeof(char));
+	printf("Name_file : %s\n", name_file);
+	char *rcv_frm_file = (char *) malloc(sizeof(char));
 	FILE *fd;
 	fd = fopen(name_file,"r+");	
 	    if(fd == NULL){
-		perror("fd= NULL can't open file \n");
+		perror("fd= NULL can't open file ");
 		exit(-1);
 	}
 	for(int y = 0 ; y < WORLDHEIGHT  ; y ++){
@@ -82,7 +90,7 @@ void initialize_world_from_file(char * name_file) {
 		for(int x = 0 ; x < WORLDWIDTH*2 ; x ++){
 			if(fscanf(fd,"%c",rcv_frm_file) != EOF){
 
-			printf("%c",(*rcv_frm_file));
+			//printf("%c",(*rcv_frm_file));
 			if(*rcv_frm_file == '|' ){
 				;
 			}else if(*rcv_frm_file == '\n' ){
@@ -161,20 +169,17 @@ void initialize_world(SIZE_MONDE Taille) {
 
 	switch (Taille)
 	{
-	case TAILLE_10:
-		worldHeight = 10;
-		worldWidth = 10;
-		num_generation = 50;
-		break;
-	case TAILLE_100:
+	case TAILLE_50:
 		worldHeight = 50;
 		worldWidth = 50;
-		num_generation = 500;
 		break;
-	case TAILLE_500:
-		worldHeight = 500;
-		worldWidth = 500;
-		num_generation = 2500;
+	case TAILLE_100:
+		worldHeight = 100;
+		worldWidth = 100;
+		break;
+	case TAILLE_150:
+		worldHeight = 150;
+		worldWidth = 150;
 		break;
 	default:
 		perror("--- Value for the world incompatble\n"); //shouldn't be another value

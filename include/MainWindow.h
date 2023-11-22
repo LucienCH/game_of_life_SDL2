@@ -4,10 +4,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "Common.h"
-#include "Graphics.h"
-#include "MenuWindow.h"
 
-int initSDLWindow();
+int initSDLWindow(int wSize);
 SDL_Renderer* get_sdl_rederer();
 SDL_Window* get_sdl_window();
 

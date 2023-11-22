@@ -4,5 +4,7 @@
 #include "Common.h"
 
 int initMatrix(int w, int h);
+void change_grid_state();
+void freeSDLRect();
 
 #endif

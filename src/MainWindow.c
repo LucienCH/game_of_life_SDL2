@@ -1,41 +1,32 @@
-#include "MainWindow.h"
+#include "Common.h"
 
 
 SDL_Window* sdl_window;
 SDL_Renderer* sdl_renderer;
 
-int initSDLWindow(){
+int initSDLWindow(int wSize){
 
-    sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,1280,720,SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    sdl_window = SDL_CreateWindow("Jeu de la vie", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,wSize,wSize,SDL_WINDOW_SHOWN);
 
     // Setup renderer
     sdl_renderer =  SDL_CreateRenderer(sdl_window, -1,SDL_RENDERER_SOFTWARE);
-
-    // Set render color to red ( background will be rendered in this color )
-    SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
-
-    // Clear winow
-    SDL_RenderClear(sdl_renderer);
+    
 
     // Boucle principale (affiche la fenêtre pendant quelques secondes)
     bool quit = false;
     SDL_Event e;
-    
-    // Initialize menu 
-    if(initMenu() != 0){
-        perror("Cannot initialize menu ");
-        return -1;
-    }
+
+    // Set render color to red ( background will be rendered in this color )
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
+
+    // Clear winow
+    SDL_RenderClear(sdl_renderer);
+
+    initMatrix(0, 0);
+    SDL_RenderPresent(get_sdl_rederer());
 
 
     while (!quit) {
-        // Set render color to red ( background will be rendered in this color )
-        SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
-
-        // Clear winow
-        SDL_RenderClear(sdl_renderer);
-        dispMenu(sdl_renderer);
- 
         while (SDL_PollEvent(&e) != 0) {
             
             switch (e.type)
@@ -43,23 +34,17 @@ int initSDLWindow(){
             case SDL_QUIT:
                 quit = true;
                 break;
-            
-            case SDL_MOUSEBUTTONDOWN:
-                printf("ok\n");
-                break;
-            
             }
         }
-        
-        
-        // // Attendre pendant une courte période (en millisecondes)
-        // SDL_Delay(10000); // Attendre 10 seconde
-        // quit = true;     // Quitter la boucle
+        usleep(16000);
+        change_grid_state();
     }
 
     // Libération des ressources et fermeture de SDL
+    freeSDLRect();
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
+    run_flag = 0;
     return 0;
 }
 
